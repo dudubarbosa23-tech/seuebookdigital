@@ -1,153 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SeuEbookDigital</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: Arial, sans-serif; background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed; background-size: cover; color:#333; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeuEbookDigital</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: rgba(75,0,130,0.85);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  header img { max-height: 60px; display:block; margin:0 auto 10px; }
+  header h1 { font-size:2rem; margin-bottom:10px; }
+  nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav a:hover { text-decoration: underline; }
 
-    header { background: rgba(75,0,130,0.85); color:#fff; padding:20px; text-align:center; position: sticky; top:0; z-index:1000; }
-    header img { max-height:60px; display:block; margin:0 auto 10px; }
-    header h1 { font-size:2rem; margin-bottom:10px; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
-    nav a:hover { text-decoration: underline; }
+  section { padding:50px 20px; max-width:1100px; margin:auto; background: rgba(255,255,255,0.95); border-radius:15px; margin-bottom:30px; }
+  h2 { text-align:center; margin-bottom:30px; color:#4b0082; }
 
-    section { padding:50px 20px; max-width:1100px; margin:auto; background: rgba(255,255,255,0.95); border-radius:15px; margin-bottom:30px; }
-    h2 { text-align:center; margin-bottom:30px; color:#4b0082; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
+  .card {
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+    transition: transform 0.2s ease;
+  }
+  .card:hover { transform: translateY(-5px); }
+  .card img { width:100%; border-radius:10px; margin-bottom:10px; }
+  .card h3 { margin-bottom:10px; color:#4b0082; }
+  .card p { margin-bottom:10px; color:#555; }
+  .price { font-weight:bold; margin-bottom:15px; }
+  .btn {
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:5px;
+    background:#4b0082;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+    margin:5px;
+    transition: background 0.3s;
+    cursor:pointer;
+  }
+  .btn:hover { background:#360061; }
 
-    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
-    .card { background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; transition: transform 0.2s ease; }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { margin-bottom:10px; color:#4b0082; }
-    .card p { margin-bottom:10px; color:#555; }
-    .price { font-weight:bold; margin-bottom:15px; }
-    .btn { display:inline-block; padding:10px 20px; border-radius:5px; background:#4b0082; color:#fff; text-decoration:none; font-weight:bold; margin:5px; transition: background 0.3s; cursor:pointer; }
-    .btn:hover { background:#360061; }
+  footer { background:#4b0082; color:#fff; text-align:center; padding:15px; margin-top:40px; }
 
-    footer { background:#4b0082; color:#fff; text-align:center; padding:15px; margin-top:40px; }
+  #carrinho, #wishlist { margin-bottom: 30px; }
+  #carrinho h3, #wishlist h3 { text-align:center; margin-bottom:15px; color:#4b0082; }
+  ul { list-style:none; padding:0; }
+  li { padding:5px 0; }
 
-    /* Carrinho e lista de desejos */
-    #carrinho, #wishlist { margin-bottom: 30px; }
-    #carrinho h3, #wishlist h3 { text-align:center; margin-bottom:15px; color:#4b0082; }
-    ul { list-style:none; padding:0; }
-    li { padding:5px 0; }
-  </style>
+  /* Botão WhatsApp fixo */
+  #whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Logo SeuEbookDigital">
-    <h1>SeuEbookDigital</h1>
-    <nav>
-      <a href="#inicio">Início</a>
-      <a href="#ebooks">Catálogo</a>
-      <a href="#magia">Serviços/Magia</a>
-      <a href="#quem-somos">Quem Somos</a>
-      <a href="#contato">Contato</a>
-      <a href="#carrinho">Carrinho</a>
-      <a href="#wishlist">Lista de Desejos</a>
-    </nav>
-  </header>
+<header>
+  <img src="logo.png" alt="Logo SeuEbookDigital">
+  <h1>SeuEbookDigital</h1>
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#ebooks">Catálogo</a>
+    <a href="#magia">Serviços/Magia</a>
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#contato">Contato</a>
+    <a href="#carrinho">Carrinho</a>
+    <a href="#wishlist">Lista de Desejos</a>
+  </nav>
+</header>
 
-  <!-- Início -->
-  <section id="inicio">
-    <h2>Bem-vindo ao SeuEbookDigital</h2>
-    <p>Loja 100% virtual de eBooks e serviços digitais. Autor independente, vendendo suas próprias obras com qualidade e segurança. Navegue, escolha seu livro ou serviço e faça sua compra com facilidade.</p>
-  </section>
+<section id="inicio">
+  <h2>Bem-vindo ao SeuEbookDigital</h2>
+  <p>Loja 100% virtual de eBooks e serviços digitais. Autor independente, vendendo suas próprias obras com qualidade e segurança. Navegue, escolha seu livro ou serviço e faça sua compra com facilidade.</p>
+</section>
 
-  <!-- Catálogo de eBooks -->
-  <section id="ebooks">
-    <h2>Catálogo de eBooks</h2>
-    <div class="grid" id="ebooks-list">
-      <div class="card">
-        <h3>Estrelas Entre Sombras</h3>
-        <p>Uma jornada única através da ficção e mistério.</p>
-        <p class="price">R$20</p>
-        <button class="btn" onclick="addToCart('Estrelas Entre Sombras', 20)">Adicionar ao Carrinho</button>
-        <button class="btn" onclick="addToWishlist('Estrelas Entre Sombras', 20)">Adicionar à Lista de Desejos</button>
-        <a class="btn" href="https://drive.google.com/file/d/1DBIPF-GMwiSMUFutsQt9HvNB7bbPAHOv/view?usp=sharing" target="_blank">Ver Amostra</a>
-      </div>
-      <!-- Adicione mais eBooks aqui com o mesmo padrão -->
-    </div>
-  </section>
+<section id="ebooks">
+  <h2>Catálogo de eBooks</h2>
+  <div class="grid" id="ebooks-list"></div>
+</section>
 
-  <!-- Serviços / Magia -->
-  <section id="magia">
-    <h2>Serviços Digitais / Magia</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Mapa Astral</h3>
-        <p>Promoção por tempo indeterminado.</p>
-        <p class="price">R$30</p>
-        <button class="btn" onclick="addToCart('Mapa Astral', 30)">Adicionar ao Carrinho</button>
-      </div>
-      <div class="card">
-        <h3>Poções</h3>
-        <p>Vitalidade, Disposição, Sensibilidade Energética, Limpeza</p>
-        <p class="price">R$50 - R$70</p>
-        <button class="btn" onclick="addToCart('Poções', 50)">Adicionar ao Carrinho</button>
-      </div>
-      <div class="card">
-        <h3>Feitiços</h3>
-        <p>Abertura de Caminhos, Oportunidades Profissionais, Insônia, Quebra de Amarrações</p>
-        <p class="price">R$80 - R$120</p>
-        <button class="btn" onclick="addToCart('Feitiços', 80)">Adicionar ao Carrinho</button>
-      </div>
-      <div class="card">
-        <h3>Banimento</h3>
-        <p>Serviço especializado.</p>
-        <p class="price">R$100</p>
-        <button class="btn" onclick="addToCart('Banimento', 100)">Adicionar ao Carrinho</button>
-      </div>
-    </div>
-  </section>
+<section id="magia">
+  <h2>Serviços Digitais / Magia</h2>
+  <div class="grid" id="magia-list"></div>
+</section>
 
-  <!-- Quem Somos -->
-  <section id="quem-somos">
-    <h2>Quem Somos</h2>
-    <p>Sou um autor independente e autônomo, vendendo minhas próprias obras digitais de forma 100% virtual. Nosso objetivo é levar conteúdo de qualidade direto para você, com praticidade e segurança.</p>
-  </section>
+<section id="quem-somos">
+  <h2>Quem Somos</h2>
+  <p>Sou um autor independente e autônomo, vendendo minhas próprias obras digitais de forma 100% virtual. Nosso objetivo é levar conteúdo de qualidade direto para você, com praticidade e segurança.</p>
+</section>
 
-  <!-- Contato -->
-  <section id="contato">
-    <h2>Contato</h2>
-    <form name="contato" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contato">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
-      
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" required>
-      
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" name="mensagem" required></textarea>
-      
-      <button type="submit" class="btn">Enviar</button>
-    </form>
-  </section>
+<section id="contato">
+  <h2>Contato</h2>
+  <form name="contato" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contato">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="mensagem">Mensagem:</label>
+    <textarea id="mensagem" name="mensagem" required></textarea>
+    <button type="submit" class="btn">Enviar</button>
+  </form>
+</section>
 
-  <!-- Carrinho -->
-  <section id="carrinho">
-    <h3>Seu Carrinho</h3>
-    <ul id="cart-items"></ul>
-    <p>Total: R$<span id="cart-total">0</span></p>
-  </section>
+<section id="carrinho">
+  <h3>Seu Carrinho</h3>
+  <ul id="cart-items"></ul>
+  <p>Total: R$<span id="cart-total">0</span></p>
+</section>
 
-  <!-- Lista de Desejos -->
-  <section id="wishlist">
-    <h3>Lista de Desejos</h3>
-    <ul id="wishlist-items"></ul>
-  </section>
+<section id="wishlist">
+  <h3>Lista de Desejos</h3>
+  <ul id="wishlist-items"></ul>
+</section>
 
-  <footer>
-    <p>© 2025 SeuEbookDigital – Todos os direitos reservados.</p>
-  </footer>
+<footer>
+  <p>© 2025 SeuEbookDigital – Todos os direitos reservados.</p>
+</footer>
 
-  <script>
-    // Carrinho e Lista de Desejos usando localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+<a id="whatsapp-btn" href="https://wa.me/5511998728816" target="_blank">WhatsApp</a>
 
-    function updateCart() {
-      const
+<script>
+  // Itens do catálogo
+  const ebooks = [
+    { id:1, titulo:"Estrelas E Desejo", descricao:"Uma jornada única através da ficção e romance lgbt.", preco:20, imagem:"img/estrela.jpg", link:"https://drive.google.com/file/d/1DBIPF-GMwiSMUFutsQt9HvNB7bbPAHOv/view?usp=sharing" },
+    { id:2, titulo:"Bruxaria Vertentes historia e caminhos", descricao:"Explore a magia de forma profunda e estruturada com Magia: Vertentes, História e Caminhos. Este livro apresenta a evolução histórica da prática mágica, suas diferentes vertentes e tradições, e oferece caminhos claros para quem deseja entender ou aplicar seus conceitos de forma consciente.
+
+Com linguagem acessível, ele combina teoria e prática, mostrando:
+
+As principais vertentes da magia e suas características
+
+Contexto histórico e cultural de cada prática
+
+Caminhos para aplicação ética e segura no cotidiano
+
+Técnicas e exercícios para compreensão e desenvolvimento pessoal
+
+Ideal para: estudantes de magia, curiosos e praticantes que desejam unir conhecimento histórico à prática diária de forma organizada e consciente.", preco:35, imagem:"img/livro2.jpg", link:"https://drive.google.com/" }
+  ];
+  const magia = [
+    { id:101, titulo:"Mapa Astral", descricao:"Promoção por tempo indeterminado.", preco:30 },
+    { id:102, titulo:"Poções", descricao:"Vitalidade, Disposição, Sensibilidade Energética, Limpeza", preco:50 },
+    { id:103, titulo:"Feitiços", descricao:"Abertura de Caminhos, Oportunidades Profissionais, Insônia, Quebra de Amarrações", preco:80 },
+    { id:104, titulo:"Banimento", descricao:"Serviço especializado.", preco:100 }
+  ];
+
+  // Carrinho e lista de desejos
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+  function renderItems() {
+    const ebooksList = document.getElementById('ebooks-list');
+    ebooksList.innerHTML = '';
+    ebooks.forEach(item => {
+      ebooksList.innerHTML += `
+        <div class="card">
+          <img src="${item.imagem}" alt="${item.titulo}">
+          <h3>${item.titulo}</h3>
+          <p>${item.descricao}</p>
+          <p class="price">R$${item.preco}</p>
+          <button class="btn" onclick="addToCart(${item.id},'ebook')">Adicionar ao Carrinho</button>
+          <button class="btn" onclick="addToWishlist(${item.id},'ebook')">Lista de Desejos</button>
+          <a class="btn" href="${item.link}" target="_blank">Ver Amostra</a>
+        </div>
+      `;
+    });
+
+    const magiaList = document.getElementById('magia-list');
+    magiaList.innerHTML = '';
+    magia.forEach(item => {
+      magiaList.innerHTML += `
+        <div class="card">
+          <h3>${item.titulo}</h3>
+          <p>${item.descricao}</p>
+          <p class="price">R$${item.preco}</p>
+          <button class="btn" onclick="addToCart(${item.id},'magia')">Adicionar ao Carrinho</button>
+        </div>
+      `;
+    });
+  }
+
+  function addToCart(id, tipo){
+    const item = (tipo==='ebook'? ebooks.find(e=>e.id===id) : magia.find(e=>e.id===id));
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function addToWishlist(id, tipo){
+    const item = (tipo==='ebook'? ebooks.find(e=>e.id===id)

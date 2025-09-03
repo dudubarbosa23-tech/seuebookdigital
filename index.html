@@ -5,44 +5,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SeuEbookDigital</title>
   <style>
+    /* Reset e estilo base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      color: #f0f0f0;
-      background: linear-gradient(135deg, #0d0d0d, #1a0026, #33004d);
-      background-attachment: fixed;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
     }
+
+    /* Cabeçalho */
     header {
+      background: #4b0082;
+      color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 40px 20px;
-      background: rgba(0,0,0,0.6);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    header h1 {
+    header img {
+      max-height: 60px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero {
+      background: #eee;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero h1 {
       font-size: 2.5rem;
-      margin: 0;
-      color: #bb86fc;
+      margin-bottom: 15px;
+      color: #4b0082;
     }
-    header p {
+    .hero p {
       font-size: 1.2rem;
-      color: #ddd;
+      color: #555;
     }
+
+    /* Seções */
     section {
       padding: 50px 20px;
-      text-align: center;
+      max-width: 1100px;
+      margin: auto;
     }
     h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #bb86fc;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #4b0082;
     }
+
+    /* Produtos */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      max-width: 1000px;
-      margin: auto;
     }
     .card {
-      background: rgba(255,255,255,0.05);
-      padding: 20px
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { margin-bottom: 10px; color: #4b0082; }
+    .card p { margin-bottom: 10px; color: #555; }
+    .price { font-weight: bold; margin-bottom: 15px; }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background: #4b0082;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 5px;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #360061; }
+
+    /* Contato */
+    .contato p { text-align: center; margin-bottom: 15px; }
+    .contato a { color: #4b0082; font-weight: bold; }
+
+    /* Rodapé */
+    footer {
+      background: #4b0082;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo SeuEbookDigital">
+    <h1>SeuEbookDigital</h1>
+    <nav>
+      <a href="#livros">Livros</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Seus livros digitais em um só lugar</h1>
+    <p>Compre eBooks com praticidade, segurança e entrega imediata.</p>
+  </section>
+
+  <!-- Seção Livros -->
+  <section id="livros">
+    <h2>Catálogo de eBooks</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Estrelas Entre Sombras</h3>
+        <p>Uma jornada única através da ficção e mistério.</p>
+        <p class="price">R$20</p>
+        <a class="btn" href="https://www.paypal.com/paypalme/SEU_USUARIO/20">Comprar</a>
+        <a class="btn" href="https://drive.google.com/file/d/1DBIPF-GMwiSMUFutsQt9HvNB7bbPAHOv/view?usp=sharing" target="_blank">Ver Amostra</a>
+      </div>
+      <!-- Adicione mais livros aqui -->
+    </div>
+  </section>
+
+  <!-- Seção Serviços -->
+  <section id="servicos">
+    <h2>Serviços Digitais</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Mapa Astral</h3>
+        <p>Análise personalizada. Promoção por tempo indeterminado.</p>
+        <p class="price">R$30</p>
+        <a class="btn" href="https://www.paypal.com/paypalme/SEU_USUARIO/30">Comprar</a>
+      </div>
+      <!-- Outros serviços podem entrar aqui -->
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="contato">
+    <h2>Fale Conosco</h2>
+    <p>📧 E-mail: <a href="mailto:SEUEMAIL@exemplo.com">SEUEMAIL@exemplo.com</a></p>
+    <p>📱 WhatsApp: <a hr

@@ -1,63 +1,48 @@
-<!-- Seção: eBooks e Leituras -->
-<section id="ebooks-leituras" style="padding:50px; text-align:center; background: rgba(30,30,30,0.8); color:#f0f0f0; border-radius:15px; margin:30px;">
-  <h2>eBooks e Leituras</h2>
-  <p>Compre seus livros digitais e leituras. Após a compra, <strong>abra a aba de contato</strong> para receber seus arquivos e informações.</p>
-  
-  <!-- Exemplo de produto -->
-  <div class="produto" style="margin:20px auto; max-width:400px; background: rgba(50,50,50,0.9); padding:20px; border-radius:15px;">
-    <h3>Mapa Astral - Promoção</h3>
-    <p>Preço: R$30 (promoção por tempo indeterminado)</p>
-    <button onclick="window.location.href='https://www.paypal.com/paypalme/SEU_USUARIO/30'">Comprar</button>
-    <button onclick="window.location.href='#contato'">Abrir aba de contato</button>
-  </div>
-</section>
-
-<!-- Seção: Poções e Feitiços -->
-<section id="magia" style="padding:50px; text-align:center; background: rgba(25,25,25,0.9); color:#f0f0f0; border-radius:15px; margin:30px;">
-  <h2>Poções e Feitiços</h2>
-  
-  <!-- Poções -->
-  <div class="subsecao" style="margin:20px auto; max-width:600px;">
-    <h3>Poções</h3>
-    <ul style="list-style:none; padding:0;">
-      <li>Vitalidade</li>
-      <li>Disposição</li>
-      <li>Sensibilidade Energética</li>
-      <li>Limpeza</li>
-    </ul>
-    <p>Preço: R$ [defina o valor]</p>
-    <button onclick="window.location.href='https://www.paypal.com/paypalme/SEU_USUARIO/VALOR'">Comprar Poções</button>
-  </div>
-
-  <!-- Feitiços -->
-  <div class="subsecao" style="margin:20px auto; max-width:600px;">
-    <h3>Feitiços</h3>
-    <ul style="list-style:none; padding:0;">
-      <li>Abertura de Caminhos</li>
-      <li>Abertura de Oportunidades Profissionais</li>
-      <li>Insônia</li>
-      <li>Quebra de Amarrações</li>
-    </ul>
-    <p>Preço: R$ [defina o valor]</p>
-    <button onclick="window.location.href='https://www.paypal.com/paypalme/SEU_USUARIO/VALOR'">Comprar Feitiços</button>
-  </div>
-
-  <!-- Banimentos -->
-  <div class="subsecao" style="margin:20px auto; max-width:600px;">
-    <h3>Banimentos</h3>
-    <p>Preço: R$100</p>
-    <button onclick="window.location.href='https://www.paypal.com/paypalme/SEU_USUARIO/100'">Comprar Banimento</button>
-  </div>
-</section>
-
-<!-- Seção de Contato -->
-<section id="contato" style="padding:50px; text-align:center; background: rgba(30,30,30,0.8); color:#f0f0f0; border-radius:15px; margin:30px;">
-  <h2>Contato</h2>
-  <p>Após a compra, entre em contato aqui para receber seu eBook, leitura ou informações sobre poções e feitiços.</p>
-  <form action="mailto:SEU_EMAIL@exemplo.com" method="post" enctype="text/plain">
-    <input type="text" name="nome" placeholder="Seu nome" required style="padding:10px; margin:5px;"><br>
-    <input type="email" name="email" placeholder="Seu e-mail" required style="padding:10px; margin:5px;"><br>
-    <textarea name="mensagem" placeholder="Sua mensagem" required style="padding:10px; margin:5px;"></textarea><br>
-    <button type="submit" style="padding:10px 20px; border-radius:5px; background:#8f00ff; color:white; border:none; cursor:pointer;">Enviar</button>
-  </form>
-</section>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeuEbookDigital</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #f0f0f0;
+      background: linear-gradient(135deg, #0d0d0d, #1a0026, #33004d);
+      background-attachment: fixed;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.6);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #bb86fc;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #bb86fc;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px

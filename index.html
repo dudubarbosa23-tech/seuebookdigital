@@ -70,7 +70,6 @@
   ul { list-style:none; padding:0; }
   li { padding:5px 0; }
 
-  /* Botão WhatsApp fixo */
   #whatsapp-btn {
     position: fixed;
     bottom: 20px;
@@ -84,6 +83,8 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     z-index: 1000;
   }
+
+  input, textarea { width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc; }
 </style>
 </head>
 <body>
@@ -153,71 +154,44 @@
 <a id="whatsapp-btn" href="https://wa.me/5511998728816" target="_blank">WhatsApp</a>
 
 <script>
-  // Itens do catálogo
-  const ebooks = [
-    { id:1, titulo:"Estrelas E Desejo", descricao:"Uma jornada única através da ficção e romance lgbt.", preco:20, imagem:"img/estrela.jpg", link:"https://drive.google.com/file/d/1DBIPF-GMwiSMUFutsQt9HvNB7bbPAHOv/view?usp=sharing" },
-    { id:2, titulo:"Bruxaria Vertentes historia e caminhos", descricao:"Explore a magia de forma profunda e estruturada com Magia: Vertentes, História e Caminhos. Este livro apresenta a evolução histórica da prática mágica, suas diferentes vertentes e tradições, e oferece caminhos claros para quem deseja entender ou aplicar seus conceitos de forma consciente.
+const ebooks = [
+  {id:1,titulo:"Estrelas Entre Sombras",descricao:"Uma jornada única através da ficção e mistério.",preco:20,imagem:"img/estrela.jpg",link:"https://drive.google.com/file/d/1DBIPF-GMwiSMUFutsQt9HvNB7bbPAHOv/view?usp=sharing"},
+  {id:2,titulo:"Magia: Vertentes, História e Caminhos",descricao:"Explore a magia de forma estruturada, conhecendo vertentes, história e caminhos.",preco:100,imagem:"img/magia.jpg",link:"https://drive.google.com/"}  
+];
 
-Com linguagem acessível, ele combina teoria e prática, mostrando:
+const magia = [
+  {id:101,titulo:"Mapa Astral",descricao:"Promoção por tempo indeterminado.",preco:30},
+  {id:102,titulo:"Poções",descricao:"Vitalidade, Disposição, Sensibilidade Energética, Limpeza",preco:50},
+  {id:103,titulo:"Feitiços",descricao:"Abertura de Caminhos, Oportunidades Profissionais, Insônia, Quebra de Amarrações",preco:80},
+  {id:104,titulo:"Banimento",descricao:"Serviço especializado.",preco:100}
+];
 
-As principais vertentes da magia e suas características
+let cart = JSON.parse(localStorage.getItem('cart'))||[];
+let wishlist = JSON.parse(localStorage.getItem('wishlist'))||[];
 
-Contexto histórico e cultural de cada prática
+function renderItems(){
+  const ebooksList=document.getElementById('ebooks-list');
+  ebooksList.innerHTML='';
+  ebooks.forEach(item=>{
+    ebooksList.innerHTML+=`
+      <div class="card">
+        <img src="${item.imagem}" alt="${item.titulo}">
+        <h3>${item.titulo}</h3>
+        <p>${item.descricao}</p>
+        <p class="price">R$${item.preco}</p>
+        <button class="btn" onclick="addToCart(${item.id},'ebook')">Adicionar ao Carrinho</button>
+        <button class="btn" onclick="addToWishlist(${item.id},'ebook')">Lista de Desejos</button>
+        <a class="btn" href="${item.link}" target="_blank">Ver Amostra</a>
+      </div>
+    `;
+  });
 
-Caminhos para aplicação ética e segura no cotidiano
-
-Técnicas e exercícios para compreensão e desenvolvimento pessoal
-
-Ideal para: estudantes de magia, curiosos e praticantes que desejam unir conhecimento histórico à prática diária de forma organizada e consciente.", preco:35, imagem:"img/livro2.jpg", link:"https://drive.google.com/" }
-  ];
-  const magia = [
-    { id:101, titulo:"Mapa Astral", descricao:"Promoção por tempo indeterminado.", preco:30 },
-    { id:102, titulo:"Poções", descricao:"Vitalidade, Disposição, Sensibilidade Energética, Limpeza", preco:50 },
-    { id:103, titulo:"Feitiços", descricao:"Abertura de Caminhos, Oportunidades Profissionais, Insônia, Quebra de Amarrações", preco:80 },
-    { id:104, titulo:"Banimento", descricao:"Serviço especializado.", preco:100 }
-  ];
-
-  // Carrinho e lista de desejos
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-
-  function renderItems() {
-    const ebooksList = document.getElementById('ebooks-list');
-    ebooksList.innerHTML = '';
-    ebooks.forEach(item => {
-      ebooksList.innerHTML += `
-        <div class="card">
-          <img src="${item.imagem}" alt="${item.titulo}">
-          <h3>${item.titulo}</h3>
-          <p>${item.descricao}</p>
-          <p class="price">R$${item.preco}</p>
-          <button class="btn" onclick="addToCart(${item.id},'ebook')">Adicionar ao Carrinho</button>
-          <button class="btn" onclick="addToWishlist(${item.id},'ebook')">Lista de Desejos</button>
-          <a class="btn" href="${item.link}" target="_blank">Ver Amostra</a>
-        </div>
-      `;
-    });
-
-    const magiaList = document.getElementById('magia-list');
-    magiaList.innerHTML = '';
-    magia.forEach(item => {
-      magiaList.innerHTML += `
-        <div class="card">
-          <h3>${item.titulo}</h3>
-          <p>${item.descricao}</p>
-          <p class="price">R$${item.preco}</p>
-          <button class="btn" onclick="addToCart(${item.id},'magia')">Adicionar ao Carrinho</button>
-        </div>
-      `;
-    });
-  }
-
-  function addToCart(id, tipo){
-    const item = (tipo==='ebook'? ebooks.find(e=>e.id===id) : magia.find(e=>e.id===id));
-    cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  }
-
-  function addToWishlist(id, tipo){
-    const item = (tipo==='ebook'? ebooks.find(e=>e.id===id)
+  const magiaList=document.getElementById('magia-list');
+  magiaList.innerHTML='';
+  magia.forEach(item=>{
+    magiaList.innerHTML+=`
+      <div class="card">
+        <h3>${item.titulo}</h3>
+        <p>${item.descricao}</p>
+        <p class="price">R$${item.preco}</p>
+        <button
